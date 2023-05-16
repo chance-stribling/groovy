@@ -1,5 +1,22 @@
 <script>
+import { Splide, SplideSlide } from '@splidejs/vue-splide';
+import '@splidejs/vue-splide/css';
+
+document.addEventListener( 'DOMContentLoaded', function () {
+  new Splide( '#thumbnail-carousel', {
+		fixedWidth : 100,
+    fixedHeight: 60,
+		gap        : 10,
+		rewind     : true,
+		pagination : false,
+  } ).mount();
+} );
+
 export default {
+  components: {
+    Splide,
+    SplideSlide,
+  },
   data() {
     return {
       title: 'Groovy',
@@ -12,15 +29,27 @@ export default {
 <template>
   <div id="gallery" class="main">
     <h1>GALLERY</h1>
-    <v-carousel cycle height="400" width="90" hide-delimiter-background show-arrows="hover">
-      <v-carousel-item v-for="(slide, i) in slides" :key="i">
-        <v-sheet :color="colors[i]" height="100%">
-          <div class="d-flex fill-height justify-center align-center">
-            <div class="text-h2">{{ slide }} Slide</div>
-          </div>
-        </v-sheet>
-      </v-carousel-item>
-    </v-carousel>
+    <div style="width: 50vw; height: 50vh;" class="mx-auto">
+      <section
+  id="thumbnail-carousel"
+  class="splide"
+  aria-label="The carousel with thumbnails. Selecting a thumbnail will change the Beautiful Gallery carousel."
+>
+  <div class="splide__track">
+		<ul class="splide__list">
+			<li class="splide__slide">
+				<img src="../assets/tup.jpg" alt="">
+			</li>
+			<li class="splide__slide">
+				<img src="../assets/hairflip.jpg" alt="">
+			</li>
+			<li class="splide__slide">
+				<img src="../assets/tup.jpg" alt="">
+			</li>
+		</ul>
+  </div>
+</section>
+    </div>
   </div>
 </template>
 <style>
@@ -33,5 +62,10 @@ export default {
   padding-right: 50%;
   padding-top: 10px;
   margin-bottom: 15px;
+}
+.splide__slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 </style>
